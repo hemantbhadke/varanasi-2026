@@ -488,26 +488,26 @@
         }
 
         // --------------------------------------------------------
-        // 4. Content Logic (Smart Image Loading)
+        // 4. Content Logic (Custom Local Images)
         // --------------------------------------------------------
-        // This ensures the preview looks great, and your files work perfectly when you host it!
+        // IMPORTANT: Ensure your images are saved in the EXACT same folder as this HTML file!
         const appData = {
             day1: [
                 { time: '13:30', title: 'Arrival', desc: 'Transfer to Sanctuary. Welcome to the City of Light.', localImg: 'arrival.jpg', webImg: 'https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&q=80&w=600' },
-                { time: '18:30', title: 'Evening Aarti', desc: 'Witness the divine offering at Dashashwamedh Ghat.', localImg: 'image_7a3367.png', webImg: 'https://images.unsplash.com/photo-1590050752117-23a9d7fc9153?auto=format&fit=crop&q=80&w=600' }
+                { time: '18:30', title: 'Evening Aarti', desc: 'Witness the divine offering at Dashashwamedh Ghat.', localImg: 'aarti.jpg', webImg: 'https://images.unsplash.com/photo-1590050752117-23a9d7fc9153?auto=format&fit=crop&q=80&w=600' }
             ],
             day2: [
-                { time: '05:00', title: 'Subah-e-Banaras', desc: 'Sunrise boat ride and music at Assi Ghat.', localImg: 'image_7a343d.png', webImg: 'https://images.unsplash.com/photo-1595232770857-f6d2346617ba?auto=format&fit=crop&q=80&w=600' },
-                { time: '07:30', title: 'Temple Precincts', desc: 'Exploring the Kashi Vishwanath corridor.', localImg: 'image_7a3480.png', webImg: 'https://images.unsplash.com/photo-1544085311-11a028465b03?auto=format&fit=crop&q=80&w=600' },
-                { time: '18:00', title: 'Old City Walks', desc: 'Exploring hidden alleys and silk weavers.', localImg: 'image_7a37a2.png', webImg: 'https://images.unsplash.com/photo-1518105611010-ca68ba012348?auto=format&fit=crop&q=80&w=600' }
+                { time: '05:00', title: 'Subah-e-Banaras', desc: 'Sunrise boat ride and music at Assi Ghat.', localImg: 'subah.jpg', webImg: 'https://images.unsplash.com/photo-1595232770857-f6d2346617ba?auto=format&fit=crop&q=80&w=600' },
+                { time: '07:30', title: 'Temple Precincts', desc: 'Exploring the Kashi Vishwanath corridor.', localImg: 'temple.jpg', webImg: 'https://images.unsplash.com/photo-1544085311-11a028465b03?auto=format&fit=crop&q=80&w=600' },
+                { time: '18:00', title: 'Old City Walks', desc: 'Exploring hidden alleys and silk weavers.', localImg: 'alleys.jpg', webImg: 'https://images.unsplash.com/photo-1518105611010-ca68ba012348?auto=format&fit=crop&q=80&w=600' }
             ],
             day3: [
-                { time: '06:00', title: 'Sarnath Stupa', desc: 'Peaceful morning at the Buddhist ruins.', localImg: 'image_7a383a.png', webImg: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&q=80&w=600' },
-                { time: '17:00', title: 'BHU & Birla Temple', desc: 'Sunset within the University grounds.', localImg: 'image_7a3b0a.png', webImg: 'https://images.unsplash.com/photo-1566438480900-0609be27a4be?auto=format&fit=crop&q=80&w=600' }
+                { time: '06:00', title: 'Sarnath Stupa', desc: 'Peaceful morning at the Buddhist ruins.', localImg: 'sarnath.jpg', webImg: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&q=80&w=600' },
+                { time: '17:00', title: 'BHU & Birla Temple', desc: 'Sunset within the University grounds.', localImg: 'bhu.jpg', webImg: 'https://images.unsplash.com/photo-1566438480900-0609be27a4be?auto=format&fit=crop&q=80&w=600' }
             ],
             day4: [
-                { time: '10:00', title: 'Final Markets', desc: 'Picking up Banarasi Silks and sweets.', localImg: 'image_7a3b49.png', webImg: 'https://images.unsplash.com/photo-1610483178766-8092dcc6f34a?auto=format&fit=crop&q=80&w=600' },
-                { time: '12:30', title: 'Varanasi Junction', desc: 'Heading back to Nagpur.', localImg: 'image_7a3bc0.png', webImg: 'https://images.unsplash.com/photo-1506461883276-594a12b11cf3?auto=format&fit=crop&q=80&w=600' }
+                { time: '10:00', title: 'Final Markets', desc: 'Picking up Banarasi Silks and sweets.', localImg: 'markets.jpg', webImg: 'https://images.unsplash.com/photo-1610483178766-8092dcc6f34a?auto=format&fit=crop&q=80&w=600' },
+                { time: '12:30', title: 'Varanasi Junction', desc: 'Heading back to Nagpur.', localImg: 'junction.jpg', webImg: 'https://images.unsplash.com/photo-1506461883276-594a12b11cf3?auto=format&fit=crop&q=80&w=600' }
             ]
         };
 
@@ -536,7 +536,7 @@
                         <div class="col-span-1 lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
                             ${items.map((item, idx) => `
                                 <div class="reveal active group overflow-hidden rounded-[2rem] h-64 shadow-2xl" style="transition-delay: ${idx * 0.15}s">
-                                    <!-- Image Tag with Smart Fallback: Tries local file first, falls back to web URL -->
+                                    <!-- Image Tag with Smart Fallback: Tries your specific local file first, falls back to web URL if missing -->
                                     <img src="${item.localImg}" onerror="this.onerror=null; this.src='${item.webImg}';" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 filter brightness-75 group-hover:brightness-100" alt="${item.title}">
                                 </div>
                             `).join('')}
